@@ -1,0 +1,38 @@
+.App{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+/* body{
+  background: rgb(50,198,207);
+background: linear-gradient(90deg, rgba(251,188,187,1) 0%, rgb(251,188,187,1) 35%, rgb(81, 223, 223) 100%);
+}  */
+
+button{
+  color: rgb(255, 255, 255);
+  padding: 10px 30px;
+  font-size: 1em;
+  background: transparent;
+  border-radius: 50px;
+  border: 1px solid white;
+  margin: 20px auto 0;
+  cursor: pointer;
+  opacity: 0.7;
+  
+}
+
+
+.box{
+  background: rgba(255, 255, 255, 0.25);
+  /* box-shadow: 0 8px 32px 0 rgba(29, 156, 214, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 ); */
+  width: 1400px;
+  height:1250px;
+}

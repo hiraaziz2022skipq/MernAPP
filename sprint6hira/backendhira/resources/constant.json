@@ -1,0 +1,9 @@
+{
+    
+    "url_namespace" : "Hira_Aziz_Sprint6",
+    "Metricname_avail" : "Availabilty",
+    "Metricname_latency": "Latency",
+    "bucket_id":"s3_buckethira"
+
+
+}

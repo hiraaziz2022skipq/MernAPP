@@ -1,0 +1,19 @@
+{
+  "version": "16.0.0",
+  "files": {
+    "004390990ac812cea28812d89656f9decffe56bac9e751c41d83894766243248": {
+      "source": {
+        "path": "BackendhirasStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "004390990ac812cea28812d89656f9decffe56bac9e751c41d83894766243248.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Hirastagestack = void 0;
+const aws_cdk_lib_1 = require("aws-cdk-lib");
+const backendhira_stack_1 = require("./backendhira-stack");
+class Hirastagestack extends aws_cdk_lib_1.Stage {
+    constructor(scope, id, props) {
+        super(scope, id, props);
+        // Instantiate Stack      
+        const hira6stack = new backendhira_stack_1.BackendhiraStack(this, "HiraStack");
+    }
+}
+exports.Hirastagestack = Hirastagestack;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaGlyYXN0YWdlc3RhY2suanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJoaXJhc3RhZ2VzdGFjay50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7QUFBQSw2Q0FBc0Q7QUFHdEQsMkRBQW9EO0FBSXBELE1BQWEsY0FBZSxTQUFRLG1CQUFLO0lBQ3JDLFlBQVksS0FBZ0IsRUFBRSxFQUFVLEVBQUUsS0FBa0I7UUFDMUQsS0FBSyxDQUFDLEtBQUssRUFBRSxFQUFFLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFFdEIsMEJBQTBCO1FBQ3pCLE1BQU0sVUFBVSxHQUFHLElBQUksb0NBQWdCLENBQUMsSUFBSSxFQUFDLFdBQVcsQ0FBQyxDQUFBO0lBQzlELENBQUM7Q0FDSjtBQVBELHdDQU9DIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgU3RhY2ssIFN0YWNrUHJvcHMsIFN0YWdlfSBmcm9tICdhd3MtY2RrLWxpYic7XHJcbmltcG9ydCAqIGFzIGxhbWJkYSBmcm9tICdhd3MtY2RrLWxpYi9hd3MtbGFtYmRhJztcclxuaW1wb3J0IHsgQ29uc3RydWN0IH0gZnJvbSAnY29uc3RydWN0cyc7XHJcbmltcG9ydCB7QmFja2VuZGhpcmFTdGFja30gZnJvbSAnLi9iYWNrZW5kaGlyYS1zdGFjaycgXHJcbmltcG9ydCAqIGFzIGNkayBmcm9tICdhd3MtY2RrLWxpYic7XHJcblxyXG5cclxuZXhwb3J0IGNsYXNzIEhpcmFzdGFnZXN0YWNrIGV4dGVuZHMgU3RhZ2Uge1xyXG4gICAgY29uc3RydWN0b3Ioc2NvcGU6IENvbnN0cnVjdCwgaWQ6IHN0cmluZywgcHJvcHM/OiBTdGFja1Byb3BzKSB7XHJcbiAgICAgIHN1cGVyKHNjb3BlLCBpZCwgcHJvcHMpO1xyXG5cclxuICAgICAgICAvLyBJbnN0YW50aWF0ZSBTdGFjayAgICAgIFxyXG4gICAgICAgICBjb25zdCBoaXJhNnN0YWNrID0gbmV3IEJhY2tlbmRoaXJhU3RhY2sodGhpcyxcIkhpcmFTdGFja1wiKVxyXG4gICAgfVxyXG59Il19
