@@ -28,42 +28,42 @@ test('AWS Lambda', () => {
   });
 
 
-  // Test cases for post function
-  describe('POST', function() {
-    it('POST reqiest recieved and responds with json', function(done) {
-      request(app)
+  // // Test cases for post function
+  // describe('POST', function() {
+  //   it('POST reqiest recieved and responds with json', function(done) {
+  //     request(app)
 
-            .post('/')
-            .send({urls:"www.gmail.com"})
-            .set('Accept', 'application/json')
-            .expect(200, done);
-        });
-  });
+  //           .post('/')
+  //           .send({urls:"www.google.com"})
+  //           .set('Accept', 'application/json')
+  //           .expect(200, done);
+  //       });
+  // });
 
 
-  // Test case for update function
-  describe('Update', function() {
-    it('Update reqiest recieved and responds with json', function(done) {
-      request(app)
+  // // Test case for update function
+  // describe('Update', function() {
+  //   it('Update reqiest recieved and responds with json', function(done) {
+  //     request(app)
 
-            .post('/')
-            .send({url:"www.gmail.com",updatedurl:"www.dropbox.com"})
-            .set('Accept', 'application/json')
-            .expect(200, done);
-    });
-  });
+  //           .put('/')
+  //           .send({url:"www.google.com",updatedurl:"www.youtube.com"})
+  //           .set('Accept', 'application/json')
+  //           .expect(200, done);
+  //   });
+  // });
 
 
   // Test case for delete function
-  describe('Delete', function() {
-    it('Delete reqiest recieved and responds with json', function(done) {
-      request(app)
+  // describe('Delete', function() {
+  //   it('Delete reqiest recieved and responds with json', function(done) {
+  //     request(app)
 
-            .post('/')
-            .send({"deleted_url":"www.dropbox.com"})
-            .set('Accept', 'application/json')
-            .expect(200, done);
-    });
-  });
+  //           .delete('/:"www.youtube.com"')
+  //           .send()
+  //           .set('Accept', 'application/json')
+  //           .expect(200, done);
+  //   });
+  // });
 
   // Content-Type: application/json
