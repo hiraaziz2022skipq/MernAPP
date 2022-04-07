@@ -13,9 +13,9 @@ app.use(cors({'origin': "*"}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const port = 3001
+// const port = 3001
 
-app.listen(port, () => {console.log('http://localhost:'+port)})
+// app.listen(port, () => {console.log('http://localhost:'+port)})
 // Get all the documents from mongdb
 app.get('/', (req, res)=>{
 
@@ -34,14 +34,14 @@ app.get('/', (req, res)=>{
             return results;
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
         });
    let latency = latency_datapoints(url)
         .then((results) => {
             return results;
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
         });
         Promise.all([avail,latency]).then(values => { 
            
