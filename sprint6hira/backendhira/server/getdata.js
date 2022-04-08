@@ -21,7 +21,7 @@ async function avail_datapoints(url){
         MetricName: 'Availabilty',
         Namespace: 'Hira_Aziz_Sprint6',
         Period: 300,
-        StartTime: moment().subtract(1, "days").utc().format(),
+        StartTime: moment().subtract(3, "days").utc().format(),
         Dimensions: [
             {
                 Name: 'URL',
@@ -55,7 +55,7 @@ async function latency_datapoints(url){
     MetricName: 'Latency',
     Namespace: 'Hira_Aziz_Sprint6',
     Period: 300,
-    StartTime: moment().subtract(1, "days").utc().format(),
+    StartTime: moment().subtract(3, "days").utc().format(),
     Dimensions: [
         {
             Name: 'URL',
