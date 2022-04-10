@@ -1,8 +1,30 @@
-# Welcome to your CDK TypeScript project
+# WEB HEALTH CRAWLER Application
 
-This is a blank project for TypeScript development with CDK.
+## Project Backend
+The purpose of Web Health Crawler is to monitor availability and latency of public web resources after every minute and publish availability and latency data points of URL to cloudwatch. Create alarm of all URLs that will trigger if availability decreases and latency increases  beyond certain threshold. Fetch sub-URLs using Node Fetch and Cheerio. Get the datapoints of availability and latency from cloudwatch. Storing all URLs in mongo DB.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Technologies Used
+- Express js
+- Mongo DB
+- AWS Lambda
+- CloudWatch
+- API Gateway
+- Node Fetch & Cheerio
+
+## You can perform following operations
+1. get
+2. put
+3. post
+4. delete
+5. get/search/url
+6. get/getdata/url
+
+URL that will be send to the mongo DB will be in the following format
+`{ 'url' : 'www.google.com' }`
+
+## Working of Backend
+
+All the requests from frontend will be send through an API Gateway to the backend with an API key provided by API Gateway. Request will send from express.js to mongo DB and find URL in mongoDB if found then process the request otherwise send a message to the frontend.
 
 ## Useful commands
 ```bash
