@@ -6,7 +6,7 @@ const {latency_alarm,avail_alarm,Delete_alarm} = require('./alarm')
 // function to connect to database
 async function connection(){
 
-    const uri = "mongodb+srv://hiraaziz:hiraaziz@crud.kxkc9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";       // url to connect to database
+    const uri = process.env.mongouri;       // url to connect to database
     var client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 }); // Creating object of MongoDB client
     const connect = await client.connect();                                                                                 // Establishing connection to mongo DB
     return client;
@@ -53,6 +53,7 @@ async function update(url,updatedurl){
         }
         else{
             response= [{url:"URL does not exist"}]
+            client.close();
             return response;
             
         }
@@ -84,6 +85,7 @@ async function search(urls){
     }
     else{
         response= {"name":[null]}
+        client.close();
         return response;
         
     }
@@ -111,6 +113,7 @@ async function delete_url(data_delete){
     }
     else{
         response= "URL does not exist"
+        client.close();
         return response;
         
     } 
@@ -127,6 +130,7 @@ async function insert(url){
     if (ans>0){
 
         response="URL already exists"
+        client.close();
         return response
 
     }

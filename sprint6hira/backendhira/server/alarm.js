@@ -10,10 +10,10 @@ var cw = new AWS.CloudWatch();
 async function latency_alarm(url){
 
     var params = {
-        AlarmName: process.env.l_alarm_name+url,
+        AlarmName: process.env.lat_alarm_name+url,
         ComparisonOperator: 'GreaterThanThreshold',
         EvaluationPeriods: 1,
-        MetricName: 'Latency',
+        MetricName: process.env.lat_metricname,
         Namespace: process.env.Namespace,
         Period: 60,
         Statistic: 'Average',
@@ -41,11 +41,11 @@ async function latency_alarm(url){
 async function avail_alarm(url){
     
         var params = {
-            AlarmName: 'Hira_Availability_Alarm_'+url,
+            AlarmName: process.env.avail_alarm_name+url,
             ComparisonOperator: 'LessThanThreshold',
             EvaluationPeriods: 1,
-            MetricName: 'Availabilty',
-            Namespace: 'Hira_Aziz_Sprint6',
+            MetricName: process.env.avail_metricname,
+            Namespace: process.env.Namespace,
             Period: 60,
             Statistic: 'Average',
             Threshold: 1,
@@ -71,7 +71,7 @@ async function avail_alarm(url){
 async function Delete_alarm(url){
   
     var params = {
-        AlarmNames: ['Hira_Availability_Alarm_'+url, 'Hira_Latency_Alarm_'+url]
+        AlarmNames: [process.env.avail_alarm_name+url, process.env.lat_alarm_name+url]
       };
       
       cw.deleteAlarms(params, function(err, data) {

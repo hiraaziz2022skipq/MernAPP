@@ -5,21 +5,14 @@ const moment = require("moment");
 // Set the region 
 AWS.config.update({region: 'us-west-1'});
 
-async function getDataPoints(url){
-
-      const latency = await latency_datapoints(url)
-      const avail =await(avail_datapoints(url))
-      return [avail,latency]
-            
-}
 
 async function avail_datapoints(url){
 
   var cw = new AWS.CloudWatch();
       var params = {
         EndTime: moment().subtract(2, "minutes").utc().format(),
-        MetricName: 'Availabilty',
-        Namespace: 'Hira_Aziz_Sprint6',
+        MetricName: process.env.lat_alarm_name,
+        Namespace: process.env.Namespace,
         Period: 300,
         StartTime: moment().subtract(3, "days").utc().format(),
         Dimensions: [
@@ -42,7 +35,6 @@ async function avail_datapoints(url){
                   // return data;
                 // successful response
             }}).promise();
-            // console.log(`points are ${latency_dp}`)
             return avail.Datapoints;
 
 }
@@ -52,8 +44,8 @@ async function latency_datapoints(url){
   var cw = new AWS.CloudWatch();
   var params = {
     EndTime: moment().subtract(2, "minutes").utc().format(),
-    MetricName: 'Latency',
-    Namespace: 'Hira_Aziz_Sprint6',
+    MetricName: process.env.lat_metricname,
+    Namespace: process.env.Namespace,
     Period: 300,
     StartTime: moment().subtract(3, "days").utc().format(),
     Dimensions: [
