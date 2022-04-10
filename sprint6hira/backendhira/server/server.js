@@ -1,7 +1,6 @@
 const express = require('express');
 const { dbcreate, update, delete_url, insert, search } = require('./mongodb_facade')
 const { avail_datapoints, latency_datapoints } = require('./getdata')
-// const {getSuburls} = require('./fetch_urls')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
