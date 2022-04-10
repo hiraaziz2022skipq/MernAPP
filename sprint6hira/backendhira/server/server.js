@@ -13,9 +13,9 @@ app.use(cors({'origin': "*"}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// const port = 3001
+const port = 3001
 
-// app.listen(port, () => {console.log('http://localhost:'+port)})
+app.listen(port, () => {console.log('http://localhost:'+port)})
 // Get all the documents from mongdb
 app.get('/', (req, res)=>{
 
@@ -28,34 +28,32 @@ app.get('/', (req, res)=>{
  app.get('/getdata/:urldata', async function(req, res){
     
    const url = req.params.urldata //change
-   //  const points = avail_datapoints(url)  
-    let avail = avail_datapoints(url)
-        .then((results) => {
+  
+    let avail = avail_datapoints(url)                       // Getting availability datapoints
+        .then((results) => {                                // if success send datapoints
             return results;
         })
         .catch((err) => {
             // console.log(err);
         });
-   let latency = latency_datapoints(url)
-        .then((results) => {
+   let latency = latency_datapoints(url)                    // Getting latency datapoints
+        .then((results) => {                                // if success send datapoints
             return results;
         })
         .catch((err) => {
             // console.log(err);
         });
         Promise.all([avail,latency]).then(values => { 
-           
          res.send(values) 
-       });                                // Calling function get data function
+       });                              
   
 });
 
 //  Search specific document
  app.get('/search/:searchurl', (req, res)=>{
    
-   const url_value = {"url" : req.params.searchurl}
-   console.log(`get url = ${req.params.searchurl}`)
-   search(url_value)                                         // Calling function get data function
+   const url_value = {"url" : req.params.searchurl}          // Creating an obj for url
+   search(url_value)                                         // Calling function search url
   .then(result => res.send(result));
   
 });
@@ -64,8 +62,8 @@ app.get('/', (req, res)=>{
 // Insert value into mongodb
  app.post('/', (req, res)=>{
 
-    const url_value = req.body.urls
-    insert(url_value)                                    // Calling insert into mongodb function
+    const url_value = req.body.urls                           // Getting url to send to insert func
+    insert(url_value)                                        // Calling insert into mongodb function
     .then(result => res.send(result));
      
  });
@@ -73,16 +71,17 @@ app.get('/', (req, res)=>{
 // Update value in mongodb
  app.put('/',(req,res)=>{
 
-    let updatedurl=req.body.updateurl           // Getting updated url
-    let url = req.body.url                      // Getting url to update
-    update(url,updatedurl)                              // Calling update function
+    let updatedurl=req.body.updateurl                       // Getting updated url
+    let url = req.body.url                                  // Getting url to update
+    update(url,updatedurl)                                  // Calling an update function
     .then(result => res.send(result));
    
  });
+
 // Delete url from mongodb
 app.delete('/:url',(req,res)=>{
-    let deleted_url={"url":req.params.url}                // Getting url to delete from mongodb
-    delete_url(deleted_url)                             // Calling delete function
+    let deleted_url={"url":req.params.url}                   // Getting url to delete from mongodb
+    delete_url(deleted_url)                                  // Calling delete function
     .then(result => res.send(result));
    
 })
