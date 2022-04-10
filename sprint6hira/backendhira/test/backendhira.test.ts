@@ -16,16 +16,16 @@ test('AWS Lambda', () => {
 
   
   // Test cases for get function
-  describe('GET', function() {
-    it('Get reqiest recieved and responds with json', function(done) {
-      request(app)
+  // describe('GET', function() {
+  //   it('Get reqiest recieved and responds with json', function(done) {
+  //     request(app)
 
-            .get('/')
-            .send()
-            .set('Accept', 'application/json')
-            .expect(200, done);
-    });
-  });
+  //           .get('/')
+  //           .send()
+  //           .set('Accept', 'application/json')
+  //           .expect(200, done);
+  //   });
+  // });
 
 
   // // Test cases for post function
