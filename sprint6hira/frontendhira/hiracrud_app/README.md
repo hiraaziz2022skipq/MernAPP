@@ -1,17 +1,17 @@
 
-#WEB HEALTH CRAWLER
+# WEB HEALTH CRAWLER Application
 
-##Project Frontend
+## Project Frontend
 The purpose of Web Health Crawler is to monitor availability and latency of public web resources after every minute and publish availability and latency data points of URL to cloudwatch. Create alarm of all URLs that will trigger if availability decreases and latency increases  beyond certain threshold. First three sub-URLs of URL exist in mongoDB will be shown on frontend using d3 hierarchy. Stats of availability and latency of URLs will be presented using HighCharts. User will access these CRUD operations after successfully login to the auth0.
 
-##Technologies Used
+## Technologies Used
 - React js 
 - Material UI 
 - API Gateway
 - Auth0
 - Netlify
 
-##You can perform following operations
+## You can perform following operations
 1. Insert URL
 2. Delete URL
 3. Edit URL
@@ -20,7 +20,7 @@ The purpose of Web Health Crawler is to monitor availability and latency of publ
 
 URL should be in this format www.google.com when send from frontend.
 
-##Working of Frontend
+## Working of Frontend
 
 All the requests from frontend will be send through an API Gateway to the backend with an API key provided by API Gateway. For Auth0, frontend is deployed on netlify and netlify url is added to auth0.
 
@@ -68,4 +68,5 @@ npm install @auth0/auth0-react
 ```bash
 npm run build
 ```
+### HAPPY CODING!
 
