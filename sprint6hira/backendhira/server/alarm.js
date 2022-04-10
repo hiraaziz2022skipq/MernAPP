@@ -10,11 +10,11 @@ var cw = new AWS.CloudWatch();
 async function latency_alarm(url){
 
     var params = {
-        AlarmName: 'Hira_Latency_Alarm_'+url,
+        AlarmName: process.env.l_alarm_name+url,
         ComparisonOperator: 'GreaterThanThreshold',
         EvaluationPeriods: 1,
         MetricName: 'Latency',
-        Namespace: 'Hira_Aziz_Sprint6',
+        Namespace: process.env.Namespace,
         Period: 60,
         Statistic: 'Average',
         Threshold: 0.3,
