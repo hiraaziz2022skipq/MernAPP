@@ -5,14 +5,18 @@ const getSuburls = async (url) => {
     const sub_url=[]
     try {
             url= "https://"+url+"/"
+
+            // Accessing the webiste
             const response = await fetch(url)
             const body = await response.text();
 
+            // fetching all URLS with a tag
             const $ = cheerio.load(body);
             const listItems = $("a");
             const sub_url=[]
             let i=0
-
+    
+      // Adding first 3 sub-URLs
       for(let i=0; i<3; i++){
             sub_url[i]=$(listItems[i]).attr('href')
         }

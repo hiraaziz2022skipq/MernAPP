@@ -10,14 +10,14 @@ var cw = new AWS.CloudWatch();
 async function latency_alarm(url){
 
     var params = {
-        AlarmName: process.env.lat_alarm_name+url,
-        ComparisonOperator: 'GreaterThanThreshold',
-        EvaluationPeriods: 1,
-        MetricName: process.env.lat_metricname,
-        Namespace: process.env.Namespace,
-        Period: 60,
+        AlarmName: process.env.lat_alarm_name+url,      // Alarm name should be unique 
+        ComparisonOperator: 'GreaterThanThreshold',     // After how many evaluation data will be compared to threshold.
+        EvaluationPeriods: 1,                           // After how many datapoints breaches to trigger alarm
+        MetricName: process.env.lat_metricname,         // Metric name
+        Namespace: process.env.Namespace,               // Namspace
+        Period: 60,                                     // After how many minutes this will check datapoints in published metrics
         Statistic: 'Average',
-        Threshold: 0.3,
+        Threshold: 0.3,                                 // It is used to check if metric is breaching
         AlarmDescription: 'Alarm_when_threshold_exceed_0.3',
         Dimensions: [
         {
@@ -41,14 +41,14 @@ async function latency_alarm(url){
 async function avail_alarm(url){
     
         var params = {
-            AlarmName: process.env.avail_alarm_name+url,
-            ComparisonOperator: 'LessThanThreshold',
-            EvaluationPeriods: 1,
-            MetricName: process.env.avail_metricname,
-            Namespace: process.env.Namespace,
-            Period: 60,
+            AlarmName: process.env.avail_alarm_name+url,    // Alarm name should be unique 
+            ComparisonOperator: 'LessThanThreshold',        // After how many evaluation data will be compared to threshold.
+            EvaluationPeriods: 1,                           // After how many datapoints breaches to trigger alarm
+            MetricName: process.env.avail_metricname,       // Metric name
+            Namespace: process.env.Namespace,               // Namepsace
+            Period: 60,                                     // After how many minutes this will check datapoints in published metrics
             Statistic: 'Average',
-            Threshold: 1,
+            Threshold: 1,                                   // It is used to check if metric is breaching
             AlarmDescription: 'Alarm_when_availability=0',
             Dimensions: [
             {
@@ -58,6 +58,7 @@ async function avail_alarm(url){
             ]
         };
         
+        // passing params to putMetricAalrm
         cw.putMetricAlarm(params, function(err, data) {
             if (err) {
             console.log("Error", err);
@@ -71,9 +72,12 @@ async function avail_alarm(url){
 async function Delete_alarm(url){
   
     var params = {
+
+        // Add availability and Latency aLarms
         AlarmNames: [process.env.avail_alarm_name+url, process.env.lat_alarm_name+url]
       };
       
+      // Passing params to deleteAlarms
       cw.deleteAlarms(params, function(err, data) {
         if (err) {
           console.log("Error", err);

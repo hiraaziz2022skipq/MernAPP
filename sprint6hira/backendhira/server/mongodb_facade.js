@@ -6,9 +6,11 @@ const {latency_alarm,avail_alarm,Delete_alarm} = require('./alarm')
 // function to connect to database
 async function connection(){
 
-    const uri = process.env.mongouri;       // url to connect to database
-    var client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 }); // Creating object of MongoDB client
-    const connect = await client.connect();                                                                                 // Establishing connection to mongo DB
+    const uri = process.env.mongouri;                                                   // url to connect to database
+    var client = new MongoClient(uri, { useNewUrlParser: true,                          // Creating object of MongoDB client
+                                        useUnifiedTopology: true, 
+                                        serverApi: ServerApiVersion.v1 });              
+    const connect = await client.connect();                                             // Establishing connection to mongo DB
     return client;
 
 }
@@ -17,7 +19,7 @@ async function connection(){
 async function dbcreate(newURL){
         
         client = await connection()
-        const result = await client.db('webhealth').collection('urls').find().toArray();                                    // query to get all documents from database
+        const result = await client.db('webhealth').collection('urls').find().toArray();   // query to get all documents from database
         client.close();
         return result;
     
@@ -27,23 +29,26 @@ async function dbcreate(newURL){
 // function to update url from database
 async function update(url,updatedurl){
 
-        client = await connection()
-        let updatedurls={"url":updatedurl}           // Getting suburls
-        let urls = {"url":url}  
+        client = await connection()                                                        // Establishing connection
+        let updatedurls={"url":updatedurl}                                                 // create update url obj
+        let urls = {"url":url}                                                             // creating old url obj
 
-        const ans = await client.db('webhealth').collection('urls').countDocuments(urls)
+        const ans = await client.db('webhealth').collection('urls').countDocuments(urls)   // mongo DB query to count url in DB
 
-        if (ans>0){
+        if (ans>0){                                                                        // if url exist in DB
 
-            //Delete old url alarms
-            Delete_alarm(urls.url).then((result) => console.log("Alarms deleted"))
-
-            response= [{url:"URL Updated"}]
-                const result = await client.db('webhealth').collection('urls').updateOne(urls,{$set: updatedurls})             // Query to update url from database
-                console.log(result)
+            Delete_alarm(urls.url).then((result) => console.log("Alarms deleted"))         //Delete old url alarms
+            response= [{url:"URL Updated"}]                                                // Create response obj to send back
+                                                           
+            // Query to update url from database
+            const result = await client.db('webhealth').collection('urls').updateOne(urls,{$set: updatedurls})             
+         
+                // Creating latency alarm
                 setTimeout(function(){
                     latency_alarm(url).then((result) => console.log("Alarms created"))
                 },1000);
+
+                // Creating availability alarm
                 setTimeout(function(){
                     avail_alarm(url).then((result) => console.log("Alarms created"))
                 },1000);
@@ -51,9 +56,9 @@ async function update(url,updatedurl){
                 client.close();
                 return response;
         }
-        else{
-            response= [{url:"URL does not exist"}]
-            client.close();
+        else{                                                                               // If URL does not exist
+            response= [{url:"URL does not exist"}]                                          // Create response obj to send back
+            client.close();                                                                 // Close connection from mongo DB
             return response;
             
         }
@@ -62,58 +67,55 @@ async function update(url,updatedurl){
 // Function to search for url and get sub-urls
 async function search(urls){
 
-    let url_data = {}
-    let childrens = []
-    client = await connection()
+    let url_data = {}                                                                       // create url_data obj
+    let childrens = []                                                                      // create childrens array
+    client = await connection()                                                             // Establishing connection with mongoDB
     
+    // Query to update url from database
     const ans = await client.db('webhealth').collection('urls').countDocuments(urls)
 
     if (ans>0){
         
+        // Getting sub-URLs
         const suburls = await getSuburls(urls.url)
 
         for (let i=0; i<suburls.length;i++){
-
+            
+            // adding sub-URLs in children array in form of obj
             childrens[i]={'name' : suburls[i]}
         }
      
-        url_data = {'name': urls.url,  
-        'children' : childrens}
+        // adding name and children in form of obj
+        url_data = {'name': urls.url, 'children' : childrens}
 
         client.close();
         return url_data
     }
     else{
-        response= {"name":[null]}
-        client.close();
+        response= {"name":[null]}                                                           // Create response obj to send back
+        client.close();                                                                     // Close mongo DB connection
         return response;
         
     }
 }
 
-
 // function to delete url from database
 async function delete_url(data_delete){
     
-    client = await connection()
-    const ans = await client.db('webhealth').collection('urls').countDocuments(data_delete)
-    console.log(`data to be deleted ${data_delete.url}`)
-    console.log(ans)
-    if (ans>0){
+    client = await connection()                                                                 // create url_data obj
+    const ans = await client.db('webhealth').collection('urls').countDocuments(data_delete)     // mongo DB query to count url in DB
+   
+    if (ans>0){                                                                                 // if URL exist
 
-        // trippie123
-        
-        Delete_alarm(data_delete.url).then((result) => console.log("Alarms deleted"))
-        
-        response="URL Deleted"
-        const result = await client.db('webhealth').collection('urls').deleteOne(data_delete)                                // Query to delete url from database
-        console.log(result)
-        client.close();
+        Delete_alarm(data_delete.url).then((result) => console.log("Alarms deleted"))           // Delete alarms
+        response="URL Deleted"                                                                  // Create response string to send back
+        const result = await client.db('webhealth').collection('urls').deleteOne(data_delete)   // Query to delete url from database
+        client.close();                                                                         // Close connection
         return response
     }
     else{
-        response= "URL does not exist"
-        client.close();
+        response= "URL does not exist"                                                          // Create response string to send back
+        client.close();                                                                         // Close connection
         return response;
         
     } 
@@ -123,29 +125,33 @@ async function delete_url(data_delete){
 // function to insert url 
 async function insert(url){
   
-    client = await connection()
-    const value_insert = { "url":url }
-    const ans = await client.db('webhealth').collection('urls').countDocuments(value_insert)
+    client = await connection()                                                                 // Establishing connection
+    const value_insert = { "url":url }                                                          // creating obj of url
+    const ans = await client.db('webhealth').collection('urls').countDocuments(value_insert)    // mongo DB query to count url in DB
 
-    if (ans>0){
+    if (ans>0){                                                                                 // if URL exist
 
-        response="URL already exists"
-        client.close();
+        response="URL already exists"                                                           // setting up respnse to send back
+        client.close();                                                                         // close connection
         return response
 
     }
-    else{
+    else{                                                                                       // if URL does not exist
 
-        response= "URL inserted"
-        const result = await client.db('webhealth').collection('urls').insertOne(value_insert);                               // Query to insert url into database
-        console.log(result)
+        response= "URL inserted"                                                                // setting up respnse to send back
+        const result = await client.db('webhealth').collection('urls').insertOne(value_insert); // Query to insert url into database
+       
+        // Creating availability alarm
         setTimeout(function(){
             latency_alarm(url).then((result) => console.log("Alarms created"))
         },1000);
+
+        // Creating latency alarm
         setTimeout(function(){
             avail_alarm(url).then((result) => console.log("Alarms created"))
         },1000);
-        client.close();
+
+        client.close();                                                                           // close connection
         return response;
         
     }
