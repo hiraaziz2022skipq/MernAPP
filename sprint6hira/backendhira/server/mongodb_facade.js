@@ -7,7 +7,7 @@ const {latency_alarm,avail_alarm,Delete_alarm} = require('./alarm')
 async function connection(){
 
     const uri = process.env.mongouri;                                                   // url to connect to database
-    var client = new MongoClient(uri, { useNewUrlParser: true,                          // Creating object of MongoDB client
+    var client = new MongoClient('mongodb+srv://hiraaziz:hiraaziz@crud.kxkc9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true,                          // Creating object of MongoDB client
                                         useUnifiedTopology: true, 
                                         serverApi: ServerApiVersion.v1 });              
     const connect = await client.connect();                                             // Establishing connection to mongo DB
