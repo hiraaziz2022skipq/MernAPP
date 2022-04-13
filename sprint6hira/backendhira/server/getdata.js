@@ -14,7 +14,7 @@ async function avail_datapoints(url){
         MetricName: process.env.lat_alarm_name,
         Namespace: process.env.Namespace,
         Period: 300,
-        StartTime: moment().subtract(3, "days").utc().format(),
+        StartTime: moment().subtract(1, "days").utc().format(),
         Dimensions: [
             {
                 Name: 'URL',
@@ -47,7 +47,7 @@ async function latency_datapoints(url){
     MetricName: process.env.lat_metricname,
     Namespace: process.env.Namespace,
     Period: 300,
-    StartTime: moment().subtract(3, "days").utc().format(),
+    StartTime: moment().subtract(1, "days").utc().format(),
     Dimensions: [
         {
             Name: 'URL',
