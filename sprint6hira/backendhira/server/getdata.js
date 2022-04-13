@@ -11,10 +11,10 @@ async function avail_datapoints(url){
   var cw = new AWS.CloudWatch();
       var params = {
         EndTime: moment().subtract(2, "minutes").utc().format(),
-        MetricName: process.env.lat_alarm_name,
-        Namespace: process.env.Namespace,
+        MetricName:'Availabilty',
+        Namespace: 'Hira_Aziz_Sprint6',
         Period: 300,
-        StartTime: moment().subtract(1, "days").utc().format(),
+        StartTime: moment().subtract(300, "minutes").utc().format(),
         Dimensions: [
             {
                 Name: 'URL',
@@ -44,10 +44,10 @@ async function latency_datapoints(url){
   var cw = new AWS.CloudWatch();
   var params = {
     EndTime: moment().subtract(2, "minutes").utc().format(),
-    MetricName: process.env.lat_metricname,
-    Namespace: process.env.Namespace,
+    MetricName: 'Latency',
+    Namespace: 'Hira_Aziz_Sprint6',
     Period: 300,
-    StartTime: moment().subtract(1, "days").utc().format(),
+    StartTime: moment().subtract(30, "minutes").utc().format(),
     Dimensions: [
         {
             Name: 'URL',
