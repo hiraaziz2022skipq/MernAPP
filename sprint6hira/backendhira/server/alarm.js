@@ -10,11 +10,11 @@ var cw = new AWS.CloudWatch();
 async function latency_alarm(url){
 
     var params = {
-        AlarmName: process.env.lat_alarm_name+url,      // Alarm name should be unique 
+        AlarmName: 'Hira_Latency_Alarm_'+url,      // Alarm name should be unique 
         ComparisonOperator: 'GreaterThanThreshold',     // After how many evaluation data will be compared to threshold.
         EvaluationPeriods: 1,                           // After how many datapoints breaches to trigger alarm
-        MetricName: process.env.lat_metricname,         // Metric name
-        Namespace: process.env.Namespace,               // Namspace
+        MetricName: 'Latency',         // Metric name
+        Namespace: 'Hira_Aziz_Sprint6',               // Namspace
         Period: 60,                                     // After how many minutes this will check datapoints in published metrics
         Statistic: 'Average',
         Threshold: 0.3,                                 // It is used to check if metric is breaching
@@ -41,11 +41,11 @@ async function latency_alarm(url){
 async function avail_alarm(url){
     
         var params = {
-            AlarmName: process.env.avail_alarm_name+url,    // Alarm name should be unique 
+            AlarmName: 'Hira_Availability_Alarm_'+url,    // Alarm name should be unique 
             ComparisonOperator: 'LessThanThreshold',        // After how many evaluation data will be compared to threshold.
             EvaluationPeriods: 1,                           // After how many datapoints breaches to trigger alarm
-            MetricName: process.env.avail_metricname,       // Metric name
-            Namespace: process.env.Namespace,               // Namepsace
+            MetricName: 'Availabilty',       // Metric name
+            Namespace: 'Hira_Aziz_Sprint6',               // Namepsace
             Period: 60,                                     // After how many minutes this will check datapoints in published metrics
             Statistic: 'Average',
             Threshold: 1,                                   // It is used to check if metric is breaching
