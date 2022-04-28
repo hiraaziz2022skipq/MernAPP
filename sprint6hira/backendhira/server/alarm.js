@@ -74,7 +74,7 @@ async function Delete_alarm(url){
     var params = {
 
         // Add availability and Latency aLarms
-        AlarmNames: [process.env.avail_alarm_name+url, process.env.lat_alarm_name+url]
+        AlarmNames: ['Hira_Latency_Alarm_'+url, 'Hira_Availability_Alarm_'+url]
       };
       
       // Passing params to deleteAlarms
