@@ -48,7 +48,7 @@ export class BackendhiraStack extends Stack {
 
     // Run Lambda periodically
     const rule = new events.Rule(this, 'Rule', {
-                  schedule: events.Schedule.rate(Duration.minutes(1)),
+                  schedule: events.Schedule.rate(Duration.minutes(60)),
                   targets: [new targets.LambdaFunction(lambda_func)],
     });
 
